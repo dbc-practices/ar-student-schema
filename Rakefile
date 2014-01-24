@@ -33,6 +33,11 @@ task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
 end
 
+desc "Open an irb session preloaded with this library"
+task :console do
+  sh "irb -rubygems -I lib -r whois.rb"
+end
+
 desc "Run the specs"
 RSpec::Core::RakeTask.new(:specs)
 
