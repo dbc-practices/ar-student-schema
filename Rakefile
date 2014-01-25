@@ -2,7 +2,6 @@ require 'rake'
 require 'rspec/core/rake_task'
 require_relative 'db/config'
 require_relative 'lib/students_importer'
-require_relative 'lib/teachers_seed'
 
 desc "create the database"
 task "db:create" do
@@ -26,11 +25,6 @@ end
 desc "populate the test database with sample data"
 task "db:populate" do
   StudentsImporter.import
-end
-
-desc "populate teachers table with sample data"
-task "db:seedteacher" do
-  TeachersSeed.seed
 end
 
 desc 'Retrieves the current schema version number'
