@@ -5,9 +5,9 @@ class Student < ActiveRecord::Base
   validates :email, :uniqueness => true, :format => { :with => /\w+\@\w+.\w{2}/, :message => "Email format doesn't validate"}
   validate :valid_age?
   validate :valid_phone?
-  def name
-    "#{first_name} #{last_name}"
-  end
+  # def name
+  #   "#{first_name} #{last_name}"
+  # end
 
   def age
     now = Date.today

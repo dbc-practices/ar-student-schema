@@ -6,7 +6,7 @@ class ModifyColumns < ActiveRecord::Migration
     add_column :students, :address, :string
 
     Student.all.each do |student|
-      student.name = student.name
+      student.name = student[:first_name] + " " + student[:last_name]
       student.save
     end
 
@@ -17,7 +17,7 @@ class ModifyColumns < ActiveRecord::Migration
   def down
     add_column :students, :first_name, :string
     add_column :students, :last_name, :string
-    
+
     Student.all.each do |student|
       split = student[:name].split(" ")
       student.first_name = split[0]
