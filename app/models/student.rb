@@ -1,7 +1,7 @@
 require_relative '../../db/config'
 
 class Student < ActiveRecord::Base
-# implement your Student model here
+  belongs_to :teachers
   validates :email, :uniqueness => true, :format => { :with => /\w+\@\w+.\w{2}/, :message => "Email format doesn't validate"}
   validate :valid_age?
   validate :valid_phone?

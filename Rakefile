@@ -2,7 +2,7 @@ require 'rake'
 require 'rspec/core/rake_task'
 require_relative 'db/config'
 require_relative 'lib/students_importer'
-
+require_relative 'lib/teachers_seed'
 
 desc "create the database"
 task "db:create" do
@@ -28,14 +28,38 @@ task "db:populate" do
   StudentsImporter.import
 end
 
+desc "populate teachers table with sample data"
+task "db:seedteacher" do
+  TeachersSeed.seed
+end
+
 desc 'Retrieves the current schema version number'
 task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
 end
 
-desc "Open an irb session preloaded with this library"
-task :console do
-  sh "irb -I app/models -r student.rb"
+# desc "Open an irb session preloaded with this library"
+# task :console do
+#   sh "irb -I app/models -r student.rb"
+# end
+
+desc "console"
+task "console" do
+  # force the database connection now that the models are loaded.
+  ActiveRecord::Base.retrieve_connection
+
+  # log sql activity to standard output
+  # ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+  # load any model file found in app/models
+  Dir[File.join(File.dirname(__FILE__), 'app/models/*.rb')].each do |model_file|
+    require model_file
+  end
+
+  # start IRB in this context
+  require 'irb'
+  ARGV.clear
+  IRB.start
 end
 
 desc "Run the specs"
