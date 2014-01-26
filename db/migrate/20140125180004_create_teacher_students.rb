@@ -25,7 +25,7 @@ class CreateTeacherStudents < ActiveRecord::Migration
     # Teacherstudent.all.each do |ts|
     #   student = Student.find(ts.student_id)
     #   student.teacher_id = ts.teacher_id
-    #   student_id.save
+    #   student.save
     # end
 
     drop_table :teacherstudents
