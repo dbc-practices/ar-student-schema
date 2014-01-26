@@ -1,4 +1,5 @@
 require_relative '../config'
+require_relative '../../lib/students_importer'
 
 # this is where you should use an ActiveRecord migration to
 
@@ -15,6 +16,9 @@ class CreateStudents < ActiveRecord::Migration
       t.datetime :created_at
       t.datetime :updated_at
     end
+    p 'Start Student import'
+    StudentsImporter.import
+    p 'Finish Student import'
   end
 end
 
